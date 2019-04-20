@@ -1,0 +1,21 @@
+
+.App-bar {
+    height: 8vmin;
+    background-color: transparent;
+    background-image: url("background.PNG");
+    color: #EC1E79;
+    background-size: cover;
+  }
+  .Tool-bar {
+    justify-content: space-between;
+  }
+  
+  .App-logo {
+      height: 7vmin;
+      pointer-events: none;
+    }
+  
+  .Account-circle {
+    color: #EC1E79;
+    align-items: flex-end;
+  }
