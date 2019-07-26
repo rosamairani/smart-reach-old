@@ -30,27 +30,27 @@ const styles = theme => ({
   },
 });
 
-const currencies = [
-  {
-    value: '210',
-    label: 'San Antonio (210)',
-  },
-  {
-    value: '512',
-    label: 'Austin (512)',
-  }
-];
+// const currencies = [
+//   {
+//     value: '210',
+//     label: 'San Antonio (210)',
+//   },
+//   {
+//     value: '512',
+//     label: 'Austin (512)',
+//   }
+// ];
 
-const types = [
-  {
-    value: 'Call',
-    label: 'Phone Call'
-  },
-  {
-    value: 'Text',
-    label: 'Text'
-  }
-];
+// const types = [
+//   {
+//     value: 'Call',
+//     label: 'Phone Call'
+//   },
+//   {
+//     value: 'Text',
+//     label: 'Text'
+//   }
+// ];
 
 const lists = [
   {

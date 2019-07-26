@@ -22,7 +22,6 @@ import { mainListItems, secondaryListItems } from './listItems';
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
 import SignIn from '../SignIn/SignIn';
 import Campaigns from '../Campaigns/Campaigns';
-import background from '../AppBackground.png';
 import Dashboard from '../Dashboard/Dashboard';
 import Administrator from '../Administrator/Administrator';
 

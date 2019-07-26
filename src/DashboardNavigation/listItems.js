@@ -6,9 +6,8 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import { Switch, Route, Link, BrowserRouter, history as Router} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 export const mainListItems = (
   <div>

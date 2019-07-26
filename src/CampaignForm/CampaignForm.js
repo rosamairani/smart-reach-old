@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -14,10 +11,9 @@ import SenderForm from './SenderForm';
 import ScriptForm from './ScriptForm';
 import FeedbackForm from './FeedbackForm';
 import SetupForm from './SetupForm';
-import getMuiTheme from '@material-ui/core/styles/getMuiTheme'
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
   },
@@ -54,8 +50,8 @@ const styles = theme => ({
   button: {
     marginTop: theme.spacing.unit * 3,
     marginLeft: theme.spacing.unit,
-  },
-});
+  }
+}));
 
 const steps = ['Setup', 'Script', 'Senders', 'Feedback'];
 
@@ -74,37 +70,26 @@ function getStepContent(step) {
   }
 }
 
-class CampaignForm extends React.Component {
-  state = {
-    activeStep: 0,
+export default function CampaignForm() {
+  const classes = useStyles();
+  const [activeStep, setActiveStep] = React.useState(0);
+  // state = {
+  //   activeStep: 0,
+  // };
+
+  const handleNext = () => {
+    setActiveStep(activeStep + 1);
   };
 
-  handleNext = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep + 1,
-    }));
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
   };
 
-  handleBack = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep - 1,
-    }));
-  };
-
-  handleReset = () => {
-    this.setState({
-      activeStep: 0,
-    });
-  };
-
-  render() {
-    const { classes } = this.props;
-    const { activeStep } = this.state;
-    const muiTheme = createMuiTheme({
-      stepper: {
-          iconColor: 'green' // or logic to change color
-      }
-  });
+  // handleReset = () => {
+  //   this.setState({
+  //     activeStep: 0,
+  //   });
+  // };
 
     return (
       <React.Fragment>
@@ -114,7 +99,6 @@ class CampaignForm extends React.Component {
             <Typography component="h1" variant="h4" align="center">
               Campaign Form
             </Typography>
-            <MuiThemeProvider muiTheme={muiTheme}>
             <Stepper activeStep={activeStep} className={classes.stepper}>
               {steps.map(label => (
                 <Step key={label} className={classes.step}>
@@ -122,7 +106,6 @@ class CampaignForm extends React.Component {
                 </Step>
               ))}
             </Stepper>
-            </MuiThemeProvider>
             <React.Fragment>
               {activeStep === steps.length ? (
                 <React.Fragment>
@@ -139,14 +122,14 @@ class CampaignForm extends React.Component {
                   {getStepContent(activeStep)}
                   <div className={classes.buttons}>
                     {activeStep !== 0 && (
-                      <Button onClick={this.handleBack} className={classes.button}>
+                      <Button onClick={handleBack} className={classes.button}>
                         Back
                       </Button>
                     )}
                     <Button
                       variant="contained"
                       color="secondary"
-                      onClick={this.handleNext}
+                      onClick={handleNext}
                       className={classes.button}
                     >
                       {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
@@ -160,10 +143,7 @@ class CampaignForm extends React.Component {
       </React.Fragment>
     );
   }
-}
 
 CampaignForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
-export default withStyles(styles)(CampaignForm);
