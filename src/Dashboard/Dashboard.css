@@ -3,3 +3,7 @@
     height: 40vmin;
     pointer-events: none;
   }
+
+  .dashboard {
+    margin: 5px;
+  }

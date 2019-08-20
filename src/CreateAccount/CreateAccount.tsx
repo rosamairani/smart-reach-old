@@ -13,52 +13,40 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles, { StyledComponentProps } from '@material-ui/core/styles/withStyles';
 import background from '../AppBackground.png';
-import { Theme, createStyles } from '@material-ui/core/styles';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import { Container } from '@material-ui/core';
 
-const styles = theme => createStyles({
-  main: {
-    width: 'auto',
-    display: 'block', // Fix IE 11 issue.
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 400,
-      marginLeft: 'auto',
-      marginRight: 'auto',
+const useStyles = makeStyles(theme => ({
+    '@global': {
+      body: {
+        backgroundColor: theme.palette.common.white,
+      },
     },
-    backgroundImage: `url(${background})`,
-  },
-  paper: {
-    marginTop: theme.spacing.unit * 8,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-    backgroundImage: `url(${background})`,
-    backgroundSize: 'cover',
-  },
-  avatar: {
-    margin: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing.unit,
-  },
-  submit: {
-    color: 'white',
-    backgroundColor: '#EC1E79',
-    marginTop: theme.spacing.unit * 3,
-  },
-});
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(3),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
 
-function CreateAccount() {
-  const { classes } = props;
-
+export default function  CreateAccount() {
+  const classes = useStyles();
   return (
-    <main className={classes.main}>
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <Paper className={classes.paper}>
+      <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -89,13 +77,11 @@ function CreateAccount() {
           </Button>
         </form>
         <div>already have an account? Login here</div>
-      </Paper>
-    </main>  
+      </div>
+    </Container>  
   );
 }
 
 CreateAccount.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
-export default withStyles(styles)(CreateAccount);
