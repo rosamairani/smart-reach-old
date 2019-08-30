@@ -28,6 +28,7 @@ import { Button, Menu, MenuItem } from '@material-ui/core';
 import TopBar from '../TopBar/TopBar';
 import SignUp from '../SignUp/SignUp';
 import ContactLists from '../ContactLists/ContactLists';
+import Users from '../Users/Users';
 
 const drawerWidth = 240;
 
@@ -204,13 +205,13 @@ export default function  DashboardNavigation() {
         onClose={handleClose}
       >
         {loggedIn?<span>
-        <MenuItem  key="SignIn"
+        <MenuItem  key="Account"
               component={NavLink} to="/sign-in" onClick={handleClose}>Account</MenuItem>
-        <MenuItem key="SignUp"
+        <MenuItem key="Logout"
               component={NavLink} to="/sign-up"onClick={handleClose}>Logout</MenuItem></span>:<span><MenuItem  key="SignIn"
-              component={NavLink} to="/sign-in" onClick={handleClose}>Sign In</MenuItem>
+              component={NavLink} to="/login" onClick={handleClose}>Sign In</MenuItem>
         <MenuItem key="SignUp"
-              component={NavLink} to="/sign-up"onClick={handleClose}>Sign Up</MenuItem></span>}
+              component={NavLink} to="/register"onClick={handleClose}>Sign Up</MenuItem></span>}
       </Menu>  
               {/* </Grid> */}
           </Toolbar>
@@ -237,12 +238,13 @@ export default function  DashboardNavigation() {
           <Switch>
             <Route exact path="/" component={Dashboard} />
             <Route exact path="/reports" component={Reports} />
-            <Route path="/sign-in" component={SignIn} />
+            <Route path="/login" component={SignIn} />
             <Route path="/campaigns" component={Campaigns} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/contact-lists" component={ContactLists} />
+            <Route path="/users" component={Users} />
             <Route path="/administrator" component={Administrator} />
-            <Route path="/sign-up" component={SignUp} />
+            <Route path="/register" component={SignUp} />
           </Switch>
         </main>
       </div>

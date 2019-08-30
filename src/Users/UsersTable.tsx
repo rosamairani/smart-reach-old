@@ -86,13 +86,15 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
 }
 
 interface Data {
-    name: string;
-    uploadDate: Date;
-    numContacts: number;
+    fName: string;
+    lName: string;
+    username: string;
+    phoneNumber: string;
+    email: string;
   }
   
-  function createData(name: string, uploadDate: string, numContacts: number) {
-    return { name, uploadDate, numContacts };
+  function createData(lName: string, fName: string, username: string, phoneNumber: string, email: string) {
+    return { lName, fName, username, phoneNumber, email };
   }
 
   function createDate(date: Date){
@@ -107,12 +109,8 @@ interface Data {
   }
   
   const rows = [
-    createData('Austin Primary Contacts', createDate(new Date('2013-04-23')),  25),
-    createData('Austin 2020 Contacts', createDate(new Date('2016-04-16')), 16),
-    createData('Dallas Primary Contacts', createDate(new Date('2012-03-12')),  6),
-    createData('Dallas 2020 Contacts', createDate(new Date('2018-05-17')),  16),
-    createData('SA Primary Contacts', createDate(new Date('2018-01-02')),  3),
-    createData('SA 2020 Contacts', createDate(new Date('2018-07-14')), 9)
+    createData('Porras', 'Madison', 'porras.madison', '9282106324', 'porras.madison@gmail.com'),
+    createData('Rivera', 'Rosario', 'rivera.rosario', '9284465539', 'rivera.rosario@gmail.com'),
   ];
   
   function desc<T>(a: T, b: T, orderBy: keyof T) {
@@ -152,9 +150,11 @@ interface Data {
   }
   
   const headRows: HeadRow[] = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-    { id: 'uploadDate', numeric: false, disablePadding: false, label: 'Upload Date' },
-    { id: 'numContacts', numeric: true, disablePadding: false, label: '# of Contacts' },
+    { id: 'lName', numeric: false, disablePadding: true, label: 'Last Name' },
+    { id: 'fName', numeric: false, disablePadding: false, label: 'First Name' },
+    { id: 'username', numeric: false, disablePadding: false, label: 'Username' },
+    { id: 'email', numeric: false, disablePadding: false, label: 'E-mail' },
+    { id: 'phoneNumber', numeric: false, disablePadding: false, label: 'Phone #' },
   ];
   
   interface EnhancedTableProps {
@@ -260,7 +260,7 @@ interface Data {
             </Typography>
           ) : (
             <Typography variant="h6" id="tableTitle">
-              Contact Lists
+              Users
             </Typography>
           )}
         </div>
@@ -316,10 +316,10 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function ContactListTable() {
+export default function UsersTable() {
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
+  const [orderBy, setOrderBy] = React.useState<keyof Data>('lName');
   const [selected, setSelected] = React.useState<string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -333,7 +333,7 @@ export default function ContactListTable() {
 
   function handleSelectAllClick(event: React.ChangeEvent<HTMLInputElement>) {
     if (event.target.checked) {
-      const newSelecteds = rows.map(n => n.name);
+      const newSelecteds = rows.map(n => n.username);
       setSelected(newSelecteds);
       return;
     }
@@ -401,17 +401,17 @@ export default function ContactListTable() {
               {stableSort(rows, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.username);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.name)}
+                      onClick={event => handleClick(event, row.username)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.username}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -421,10 +421,14 @@ export default function ContactListTable() {
                         />
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.name}
+                        {row.lName}
                       </TableCell>
-                      <TableCell align="left">{row.uploadDate}</TableCell>
-                      <TableCell align="left">{row.numContacts}</TableCell>
+                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                        {row.fName}
+                      </TableCell>
+                      <TableCell align="left">{row.username}</TableCell>
+                      <TableCell align="left">{row.email}</TableCell>
+                      <TableCell align="left">{row.phoneNumber}</TableCell>
                     </TableRow>
                   );
                 })}

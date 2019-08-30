@@ -19,9 +19,10 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-  export default function Reports() {
+export default function Reports() {
 
-    const classes = useStyles();
+const classes = useStyles();
+
 return (
   <div className={classes.main} >
 <div className={classes.appBarSpacer} />

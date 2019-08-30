@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
     gridList: { 
       width: '100%',
       display: 'flex',
+      justifyContent: 'space-evenly'
       // flexWrap: 'wrap',
       // justifyContent: 'space-evenly',
       // overflow: 'hidden',
